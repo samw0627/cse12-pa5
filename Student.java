@@ -53,9 +53,35 @@ public class Student implements Comparable<Student> {
         if(this.equals(o)){
             return 0;
         }
-        int lastCompare = this.lastName.compareTo(((Student)o).getLastName());
-        int firstCompare = this.firstName.compareTo((((Student) o).getFirstName()));
-        int PIDCompare = this.getPID().compareTo((((Student) o).getPID()));
+        int lastCompareRaw = this.lastName.compareTo(((Student)o).getLastName());
+
+        int firstCompareRaw = this.firstName.compareTo((((Student) o).getFirstName()));
+
+        int PIDCompareRaw = this.getPID().compareTo((((Student) o).getPID()));
+
+        int lastCompare = 0;
+        int firstCompare = 0;
+        int PIDCompare = 0;
+
+        if(lastCompareRaw > 0){
+            lastCompare = 1;
+        }
+        if(lastCompareRaw < 0){
+            lastCompare = -1;
+        }
+
+        if(firstCompareRaw > 0){
+            firstCompare = 1;
+        }
+        if(firstCompareRaw < 0){
+            firstCompare = -1;
+        }
+        if(PIDCompareRaw > 0){
+            PIDCompare = 1;
+        }
+        if(PIDCompareRaw < 0){
+            PIDCompare = -1;
+        }
 
         if(lastCompare == 0){
             if(firstCompare == 0){

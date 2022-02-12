@@ -32,6 +32,10 @@ public class CustomTester {
         Student student2 = new Student("Sam", "Lee", "A12345678");        
       
         assertFalse(student.equals(student2));
+
+        Student student3 = new Student("Sam","Wong","A45678903");
+        assertFalse(student.equals(student3));
+
     }
 
     /**
@@ -39,6 +43,17 @@ public class CustomTester {
      */
     @Test
     public void testCompareTo() {
+        Student student = new Student("Sam", "Wong", "A12345678"); 
+        Student student2 = new Student("TJ", "Haas", "A23456789");        
+        
+        assertEquals(1, student.compareTo(student2));
+
+        Student student3 = new Student("Thomas", "Wong", "A64926593"); 
+        assertEquals(-1, student.compareTo(student3));
+
+        Student student4 = new Student("Larry", "Lee", "A34567890");
+        Student student5 = new Student("Larry", "Lee", "A56789012");
+        assertEquals(-1, student4.compareTo(student5));
 
     }
 
