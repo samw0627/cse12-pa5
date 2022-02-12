@@ -24,11 +24,14 @@ public class CustomTester {
 
     // ----------------Student class----------------
     /**
-     * Test the equals method when [TODO: fill in a possible edge case here]
+     * Test the equals method when two students are different
      */
     @Test
     public void testEquals() {
-
+        Student student = new Student("Sam", "Wong", "A12345678");  
+        Student student2 = new Student("Sam", "Lee", "A12345678");        
+      
+        assertFalse(student.equals(student2));
     }
 
     /**
