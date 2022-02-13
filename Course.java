@@ -4,6 +4,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 
 public class Course {
     HashSet<Student> enrolled;
@@ -11,6 +12,7 @@ public class Course {
     private final String department;
     private final String number;
     private final String description;
+    private final static String TEMPLATE = "%s %s [%s]\n%s";
 
     public Course(String department, String number, String description, int capacity){
             this.department = department;
@@ -28,7 +30,7 @@ public class Course {
     }
 
     public String getDescription(){
-        return this.department;
+        return this.description;
     }
 
     public int getCapacity(){
@@ -40,8 +42,9 @@ public class Course {
             throw new IllegalArgumentException();
         }
 
-        if(enrolled.size() < this.getCapacity() && enrolled.contains(student) == false){
-            enrolled.add(student);
+        if(this.enrolled.size() < this.getCapacity() && 
+        this.enrolled.contains(student) == false){
+            this.enrolled.add(student);
             return true;
         }
         return false;
@@ -53,39 +56,49 @@ public class Course {
             throw new IllegalArgumentException();
         }
 
-        if(enrolled.contains(student) == true){
-            enrolled.remove(student);
+        if(this.enrolled.contains(student) == true){
+            this.enrolled.remove(student);
             return true;
         }
         return false;
     }
 
     public void cancel() {
-        enrolled.clear();
+        this.enrolled.clear();
     }
 
     public boolean isFull() {
+        if(this.enrolled.size() == this.getCapacity()){
+            return true;
+        }
         return false;
     }
 
     public int getEnrolledCount() {
-        return 0;
+        return this.enrolled.size();
     }
 
     public int getAvailableSeats() {
-        return 0;
+        return this.capacity - this.enrolled.size();
     }
 
     public HashSet<Student> getStudents() {
-        return null;
+        return this.enrolled;
     }
 
     public ArrayList<Student> getRoster() {
-        return null;
+        ArrayList<Student> rosterArray = new ArrayList<Student>();
+        Iterator<Student> listStud = enrolled.iterator();
+        while(listStud.hasNext() == true){
+            rosterArray.add(listStud.next());
+        }
+        Collections.sort(rosterArray);
+        return rosterArray;
     }
 
     public String toString() {
-        return null;
+        return String.format(TEMPLATE, this.department, this.number,
+         this.capacity, this.description);
     }
 }
 
