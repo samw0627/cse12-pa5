@@ -118,6 +118,7 @@ public class PublicTester {
     }
 
     // Get total number of species at a sanctuary
+    @Test
     public void TestGetTotalSpecies(){
         Sanctuary sanct1 = new Sanctuary(1000, 4);
         sanct1.sanctuary.put("Koala", 55);
@@ -140,6 +141,10 @@ public class PublicTester {
         assertEquals(0, sanct.rescue("Frog", 32));
         assertTrue(sanct.sanctuary.containsKey("Frog"));
         assertEquals(32, (int)sanct.sanctuary.get("Frog"));
+
+        assertEquals(0, sanct.rescue("Panda", 3));
+        assertTrue(sanct.sanctuary.containsKey("Panda"));
+        assertEquals(6, (int)sanct.sanctuary.get("Panda"));
 
         assertEquals(2, (int)sanct.sanctuary.size());
     }

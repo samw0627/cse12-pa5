@@ -19,6 +19,7 @@ public class Course {
             this.number = number;
             this.description = description;
             this.capacity = capacity;
+            
         }
 
     public String getDepartment(){
