@@ -12,34 +12,57 @@ public class Course {
     private final String number;
     private final String description;
 
-    public Course(String department, String number, String description, 
-        int capacity){}
+    public Course(String department, String number, String description, int capacity){
+            this.department = department;
+            this.number = number;
+            this.description = description;
+            this.capacity = capacity;
+        }
 
     public String getDepartment(){
-        return null;
+        return this.department;
     }
 
     public String getNumber(){
-        return null;
+        return this.number;
     }
 
     public String getDescription(){
-        return null;
+        return this.department;
     }
 
     public int getCapacity(){
-        return 0;
+        return this.capacity;
     }
 
     public boolean enroll(Student student) {
+        if(student == null){
+            throw new IllegalArgumentException();
+        }
+
+        if(enrolled.size() < this.getCapacity() && enrolled.contains(student) == false){
+            enrolled.add(student);
+            return true;
+        }
         return false;
     }
 
     public boolean unenroll(Student student) {
+        
+        if(student == null){
+            throw new IllegalArgumentException();
+        }
+
+        if(enrolled.contains(student) == true){
+            enrolled.remove(student);
+            return true;
+        }
         return false;
     }
 
-    public void cancel() {}
+    public void cancel() {
+        enrolled.clear();
+    }
 
     public boolean isFull() {
         return false;
