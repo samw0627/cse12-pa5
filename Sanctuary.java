@@ -46,14 +46,16 @@ public class Sanctuary {
         if(num <= 0 || species == null){
             throw new IllegalArgumentException();
         }
-        int difference = maxAnimals - this.getTotalAnimals() - num;
         if(this.sanctuary.size()<maxSpecies && this.getTotalAnimals() < maxAnimals){
-            if(difference < 0){
-                this.sanctuary.put(species, num - difference + this.getNum(species));
-                return difference;
+            int total = this.getTotalAnimals() + num;
+            int overflow;
+            if(total > maxAnimals){
+                overflow = total - maxAnimals;
+                this.sanctuary.put(species, this.getNum(species) + num - overflow);
+                return overflow;
             }
             else{
-                this.sanctuary.put(species,num + this.getNum(species));
+                this.sanctuary.put(species, this.getNum(species) + num);
                 return 0;
             }
         }
@@ -61,7 +63,9 @@ public class Sanctuary {
     }
 
     public void release(String species, int num) {
-        if()
+        if(num <= 0 || num> this.getNum(species) || species == null || this.sanctuary.containsKey(species) == false){
+            throw new IllegalArgumentException();
+        }
         this.sanctuary.replace(species, this.getNum(species)-num);
         if(this.getNum(species) == 0){
             this.sanctuary.remove(species);

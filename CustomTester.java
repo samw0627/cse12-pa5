@@ -132,18 +132,28 @@ public class CustomTester {
 
     // ----------------Sanctuary class----------------
     /**
-     * Test the constructor when [TODO]
+     * Test the constructor when exception is thrown
      */
     @Test
     public void testSanctuaryConstructor() {
-
+        try{
+            Sanctuary sanct = new Sanctuary(-1, -50);
+            fail();
+        }
+        catch (IllegalArgumentException e){
+        }
     }
 
     /**
-     * Test the rescue method when [TODO]
+     * Test the rescue method when max animal is smaller than number of animals
+     * rescued.
      */
     @Test
     public void testRescueTestOne(){
+        Sanctuary sanct2 = new Sanctuary(15, 2);
+        assertEquals(5, sanct2.rescue("Panda", 20));
+        assertTrue(sanct2.sanctuary.containsKey("Panda"));
+        assertEquals(15, (int)sanct2.sanctuary.get("Panda"));
 
     }
 
