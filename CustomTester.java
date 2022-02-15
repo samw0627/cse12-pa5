@@ -1,12 +1,12 @@
 /**
- * TODO: Add your file header
- * Name:
- * ID:
- * Email:
- * Sources used: Put "None" if you did not have any external help
- * Some example of sources used would be Tutors, Zybooks, and Lecture Slides
+ * CustomTester.java
+ * Name: Sam Wong
+ * ID: A15975678
+ * Email: c6wong@ucsd.edu
+ * Sources used:JavaDoc
  * 
- * 2-4 sentence file description here
+ * Custom Tester for Sanctuary, Course and Student. Implements test that have
+ * been tested by PublicTester
  */
 
 import java.util.*;
@@ -14,11 +14,11 @@ import static org.junit.Assert.*;
 import org.junit.*;
 
 /**
- * TODO: Add your class header
- * 
- * IMPORTANT: Do not change the method names and points are awarded
- * only if your test cases cover cases that the public tester file
- * does not take into account.
+ * 11 Tests for Sanctuary, COurse and Student
+ *
+ * Bugs: none known
+ *
+ * @author    Sam Wong
  */
 public class CustomTester {
 
@@ -158,26 +158,73 @@ public class CustomTester {
     }
 
     /**
-     * Test the rescue method when [TODO: fill in another one here]
+     * Test the rescue method when the sancturary is at max capacity
      */
     @Test
     public void testRescueTestTwo(){
+        Sanctuary sanct2 = new Sanctuary(15, 2);
+        sanct2.rescue("Panda",15);
+        assertEquals(2,sanct2.rescue("Parrot",2));
+        assertFalse(sanct2.sanctuary.containsKey("Parrot"));
+        assertEquals(15, (int)sanct2.sanctuary.get("Panda"));
+
 
     }
 
     /**
-     * Test the release method when [TODO]
+     * Test the release method when all animals of that species 
+     * have been released
      */
     @Test
     public void testReleaseTestOne(){
+        Sanctuary sanctuary = new Sanctuary(40, 5);
+        sanctuary.sanctuary.put("Fox", 40);
+
+        sanctuary.release("Fox", 40);
+        assertFalse(sanctuary.sanctuary.containsKey("Fox"));
+
 
     }
 
     /**
-     * Test the release method when [TODO:fill in another one here]
+     * Test the release method when num is less than 0
      */
     @Test
     public void testReleaseTestTwo(){
+        Sanctuary sanctuary = new Sanctuary(40, 5);
+        sanctuary.sanctuary.put("Fox", 40);
+
+        try{
+            sanctuary.release("Fox", 0);
+            fail();
+        }
+        catch(IllegalArgumentException E){
+            try{
+                sanctuary.release("Fox", 500);
+                fail();
+            }
+            catch(IllegalArgumentException E2){
+                try{
+                    sanctuary.release(null, 1);
+                    fail();
+                }
+                catch(IllegalArgumentException E3){
+                    try{
+                        sanctuary.release("Pando", 1);
+                        fail();
+                    }
+                    catch(IllegalArgumentException E4){
+            
+                    }
+                }
+        
+            }
+        }
+
+        
+
+        
+      
 
     }
 }
