@@ -48,10 +48,14 @@ public class Course {
      * @param capacity
      */
     public Course(String department, String number, String description, int capacity){
+            if(department == null || number == null || description == null || capacity<=0){
+                throw new IllegalArgumentException();
+            }
             this.department = department;
             this.number = number;
             this.description = description;
             this.capacity = capacity;
+            enrolled = new HashSet<>();
             
         }
     /**

@@ -59,6 +59,7 @@ public class Sanctuary {
         if(species == null){
             throw new IllegalArgumentException();
         }
+        System.out.println(species+ " Exists?" + this.sanctuary.containsKey(species));
         //Check if the Hashtable contains target key
         if(!this.sanctuary.containsKey(species)){
             return 0;
@@ -102,21 +103,24 @@ public class Sanctuary {
         if(num <= 0 || species == null){
             throw new IllegalArgumentException();
         }
-        //Check if size is sanctuary still has room
-        if(this.sanctuary.size()<maxSpecies && this.getTotalAnimals() < 
-        maxAnimals){
+        int existingAnimals = this.getNum(species);
+        //Check if size in sanctuary still has room
+        //(total species < max species || species exists) && there is still room
+        if((this.getTotalSpecies() < maxSpecies || this.sanctuary.containsKey(species)) && this.getTotalAnimals() < maxAnimals){
+            //Get the total amount animals, adding the existing animals witht he number to be added
             int total = this.getTotalAnimals() + num; 
             int overflow;
             if(total > maxAnimals){ //calculate the overflow if at max capacity
                 overflow = total - maxAnimals;
-                this.sanctuary.put(species, this.getNum(species) + num - 
-                overflow); //Fill the animals till max capacity
+                this.sanctuary.put(species, existingAnimals + (maxAnimals - this.getTotalAnimals())); //Fill the animals till max capacity
                 return overflow;
             }
             else{
-                this.sanctuary.put(species, this.getNum(species) + num);
+                //add the number of animals to be put in
+                this.sanctuary.put(species, existingAnimals + num);
                 return 0;
             }
+        
         }
         return num;
     }

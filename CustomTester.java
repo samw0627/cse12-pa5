@@ -29,7 +29,7 @@ public class CustomTester {
     @Test
     public void testEquals() {
         Student student = new Student("Sam", "Wong", "A12345678");  
-        Student student2 = new Student("Sam", "Lee", "A12345678");        
+        Student student2 = null ;        
       
         assertFalse(student.equals(student2));
 
@@ -163,13 +163,42 @@ public class CustomTester {
     @Test
     public void testRescueTestTwo(){
         Sanctuary sanct2 = new Sanctuary(15, 2);
-        sanct2.rescue("Panda",15);
-        assertEquals(2,sanct2.rescue("Parrot",2));
+        sanct2.sanctuary.put("Panda", 15);
+        assertEquals(5,sanct2.rescue("Parrot", 5));
+        assertTrue(sanct2.sanctuary.containsKey("Panda"));
         assertFalse(sanct2.sanctuary.containsKey("Parrot"));
         assertEquals(15, (int)sanct2.sanctuary.get("Panda"));
 
 
     }
+
+    @Test
+    public void testRescueTestThree(){
+        Sanctuary sanct2 = new Sanctuary(10,2);
+        sanct2.sanctuary.put("Dog", 1);
+        sanct2.rescue("Parrot", 3);
+        assertEquals(0,sanct2.rescue("Dog", 2));
+        assertTrue(sanct2.sanctuary.containsKey("Dog"));
+        assertEquals(3, (int)sanct2.sanctuary.get("Dog"));
+
+       
+
+
+       
+
+
+    }
+
+    @Test
+    public void testRescueTestFour(){
+        Sanctuary sanct2 = new Sanctuary(0,3);
+        assertEquals(10, sanct2.rescue("Panda",10));
+        assertEquals(10, sanct2.rescue("Panda",10));
+        assertEquals(0, sanct2.sanctuary.size() );
+    }
+
+
+        
 
     /**
      * Test the release method when all animals of that species 
